@@ -1,0 +1,53 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.5
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    maven {
+    	url "http://mdevhudson.lifetouch.net:8080/nexus/content/groups/public"
+    }
+    
+    mavenCentral()
+    maven {
+        url "http://maven.restlet.com"
+    }
+    
+}
+
+ext.restlet='1.1.10'
+ext.restlet='1.1-M4'
+
+dependencies {
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile 'commons-httpclient:commons-httpclient:3.1'
+    compile 'commons-io:commons-io:2.4'
+    //compile 'org.restlet.jse:org.restlet:2.2-RC4'
+ 	
+ 	//current stuff
+ 	compile "org.restlet:org.restlet:${restlet}"
+ 	compile "org.restlet:org.restlet.ext.spring:${restlet}"
+ 	compile "com.noelios.restlet:com.noelios.restlet:${restlet}"
+			
+			
+			
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
